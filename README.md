@@ -1,12 +1,14 @@
 # ImageScaler
 
 DISCLAIMER: This is my first project in Go and is under construction.
-Please do not use it in a production environment (at least yet :smile:)
+Please do not use it in a production environment (at least yet
+:smile:)
+There are a lot of TODOs to be done.
 Contributions and comments are more than welcome.
 
-Image scaler is tiny service that aims to server "Image processing as a
+Image scaler is tiny service that aims to serve "Image processing as a
 service".
-Currently it only support image resizing.
+Currently it only supports image resizing.
 
 ## Usage
 
