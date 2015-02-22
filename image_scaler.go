@@ -18,18 +18,11 @@ import (
   "encoding/json"
 )
 
-var chttp = http.NewServeMux()
-
 type Image struct {
   Url string
 }
 
 func Resize(w http.ResponseWriter, req *http.Request) {
-  if (strings.Contains(req.URL.Path, "static/")) {
-    chttp.ServeHTTP(w, req)
-    return
-  }
-
   url := req.URL.Query().Get("url")
   param_width := req.URL.Query().Get("width")
   param_height := req.URL.Query().Get("height")
