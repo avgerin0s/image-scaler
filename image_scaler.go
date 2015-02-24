@@ -94,7 +94,7 @@ func Resize(w http.ResponseWriter, req *http.Request) {
 
 	log.Println(newFileName)
 
-	image := Image{"http://127.0.0.1:3000/static/" + newFileName}
+	image := Image{"http://127.0.0.1:" + strconv.Itoa(port) + "/static/" + newFileName}
 	js, err := json.Marshal(image)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
