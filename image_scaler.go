@@ -16,6 +16,7 @@ import (
 	"strings"
 
 	"github.com/disintegration/imaging"
+	"github.com/eavgerinos/image-scaler/processing"
 	"github.com/gorilla/mux"
 	"github.com/rakyll/magicmime"
 )
@@ -89,10 +90,9 @@ func Resize(w http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	resizedImage := imaging.Resize(img, width, height, imaging.Lanczos)
-	newFileName := "resized_" + originalFilename + "." + extension
+	newFileName := processing.Resize(img, originalFilename, extension, width, height)
 
-	imaging.Save(resizedImage, newFileName)
+	log.Println(newFileName)
 
 	image := Image{"http://127.0.0.1:3000/static/" + newFileName}
 	js, err := json.Marshal(image)
