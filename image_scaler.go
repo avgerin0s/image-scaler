@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -24,6 +25,10 @@ type Image struct {
 	URL string
 }
 
+var port int
+var directory string
+
+// Handle /resize http request
 func Resize(w http.ResponseWriter, req *http.Request) {
 	url := req.URL.Query().Get("url")
 	paramWidth := req.URL.Query().Get("width")
@@ -104,14 +109,23 @@ func main() {
 	// Use all available CPUs
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
+	flag.IntVar(&port, "port", 3000, "the port on which the service will listen on")
+	flag.StringVar(&directory, "d", ".", "the directory on which the processed images will be stored")
+	flag.Parse()
+
+	stringPort := strconv.Itoa(port)
+
 	r := mux.NewRouter()
 
 	r.HandleFunc("/resize", Resize)
-	http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir("."))))
+	http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir(directory))))
 	http.Handle("/", r)
 
-	err := http.ListenAndServe(":3000", nil)
+	log.Println("Starting server on " + stringPort)
+
+	err := http.ListenAndServe(":"+stringPort, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe:", err)
 	}
+	log.Println("Ready")
 }
