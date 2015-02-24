@@ -38,6 +38,6 @@ It returns a JSON like
 
 ```JSON
 {
-  Url: "http://127.0.0.1:3000/static/resized_cf2a7e4bc924dbde5530459152c33117.png"
+  URL: "http://127.0.0.1:3000/static/resized_cf2a7e4bc924dbde5530459152c33117.png"
 }
 ```
