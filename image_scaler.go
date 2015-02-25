@@ -28,6 +28,7 @@ type Image struct {
 
 var port int
 var directory string
+var fileNumber int
 
 // Handle /resize http request
 func Resize(w http.ResponseWriter, req *http.Request) {
@@ -110,6 +111,7 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	flag.IntVar(&port, "port", 3000, "the port on which the service will listen on")
+	flag.IntVar(&fileNumber, "n", 10, "the number of storage files to maintain")
 	flag.StringVar(&directory, "d", ".", "the directory on which the processed images will be stored")
 	flag.Parse()
 
